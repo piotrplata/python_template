@@ -27,7 +27,7 @@ pipeline {
 node('master') {
  stage('ssh') {
          sshagent (credentials: ['pegasus-ssh-credentials']) {
-                sh 'ssh -v piotr@localhost "bash -l uptime'
+                sh 'ssh -v piotr@localhost "bash -l uptime"'
             }
     }
 }
