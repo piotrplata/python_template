@@ -1,2 +1,3 @@
 include ./requirements.txt
 include python_template/VERSION
+include python_template/config.json
