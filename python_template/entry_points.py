@@ -1,4 +1,4 @@
-from logging_manager import get_logger
+from python_template.logging_manager import get_logger
 import python_template
 
 _logger = get_logger(logger_name=__name__)
