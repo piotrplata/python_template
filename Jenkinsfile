@@ -28,7 +28,7 @@ node('master') {
  stage('ssh') {
          sshagent (credentials: ['pegasus-ssh-credentials']) {
            withCredentials([string(credentialsId: 'pegasus-vm', variable: 'host')]) {
-                    sh 'ssh -v piotr@' + host + ' "bash -l uptime"'
+                    sh 'ssh -v piotr@' + host + 'uptime'
            }
 
          }
