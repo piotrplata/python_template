@@ -5,5 +5,5 @@ _logger = get_logger(logger_name=__name__)
 
 
 def run():
-    _logger.info(python_template.VERSION)
+    _logger.info(python_template.__version__)
     _logger.info("running script")
