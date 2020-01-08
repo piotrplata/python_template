@@ -17,7 +17,9 @@ pipeline {
 
     stage('test'){
         steps{
-           sh '$HOME/.local/bin/pytest'
+            withEnv(["HOME=${env.WORKSPACE}"]) {
+                sh '$HOME/.local/bin/pytest'
+            }
         }
     }
 
