@@ -15,7 +15,9 @@ pipeline {
     }
 
     stage('test'){
-        sh 'pytest'
+        steps{
+           sh 'pytest'
+        }
     }
 
     stage('deploy') {
