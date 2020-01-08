@@ -13,6 +13,11 @@ pipeline {
         }
      }
     }
+
+    stage('test'){
+        sh 'pytest'
+    }
+
     stage('deploy') {
      environment {
         GEMFURY_PUSH_URL = credentials('gemfury-access-url')
