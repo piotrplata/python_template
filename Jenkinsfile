@@ -7,7 +7,7 @@ pipeline {
     stage('user_creation'){
         steps{
         sh 'useradd -r -u 1000 tmpuser'
-        sh 'su -tmpuser'
+        sh 'su - tmpuser'
         }
     }
 
