@@ -1,15 +1,15 @@
 pipeline {
  agent { docker {
    image 'python:3.7.2'
-   args '--user root'
+   //args '--user root'
  } }
   stages {
-    stage('user_creation'){
-        steps{
-        sh 'useradd -r -u 1000 tmpuser'
-        sh 'su - tmpuser'
-        }
-    }
+//     stage('user_creation'){
+//         steps{
+//         sh 'useradd -r -u 1000 tmpuser'
+//         sh 'su - tmpuser'
+//         }
+//     }
 
     stage('build') {
       steps {
