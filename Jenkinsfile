@@ -25,6 +25,7 @@ pipeline {
 
     stage('ssh_inside_docker') {
         steps{
+           sh 'useradd -r -u 1000 tmpuser'
            sshagent (credentials: ['pegasus-ssh-credentials']) {
               withCredentials([string(credentialsId: 'pegasus-vm', variable: 'host')]) {
                     sh "ssh -o StrictHostKeyChecking=no -v piotr@" + host + " uptime"
