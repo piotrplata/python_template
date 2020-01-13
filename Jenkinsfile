@@ -23,6 +23,13 @@ pipeline {
         }
     }
 
+    stage('ssh_inside_docker') {
+        sshagent (credentials: ['pegasus-ssh-credentials']) {
+           withCredentials([string(credentialsId: 'pegasus-vm', variable: 'host')]) {
+                    sh "ssh -v piotr@" + host + " uptime"
+           }
+    }
+
     stage('deploy') {
      environment {
         GEMFURY_PUSH_URL = credentials('gemfury-access-url')
