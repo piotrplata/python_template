@@ -27,7 +27,7 @@ pipeline {
         steps{
            sshagent (credentials: ['pegasus-ssh-credentials']) {
               withCredentials([string(credentialsId: 'pegasus-vm', variable: 'host')]) {
-                    sh "ssh -v piotr@" + host + " uptime"
+                    sh "ssh -o StrictHostKeyChecking=no -v piotr@" + host + " uptime"
               }
            }
         }
