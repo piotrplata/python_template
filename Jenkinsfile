@@ -4,6 +4,13 @@ pipeline {
    //args '--user root'
  } }
   stages {
+    stage('user_creation'){
+        steps{
+        sh 'useradd -r -u 1000 tmpuser'
+        sh 'su -tmpuser'
+        }
+    }
+
     stage('build') {
       steps {
 
@@ -25,7 +32,6 @@ pipeline {
 
     stage('ssh_inside_docker') {
         steps{
-           sh 'useradd -r -u 1000 tmpuser'
            sshagent (credentials: ['pegasus-ssh-credentials']) {
               withCredentials([string(credentialsId: 'pegasus-vm', variable: 'host')]) {
                     sh "ssh -o StrictHostKeyChecking=no -v piotr@" + host + " uptime"
