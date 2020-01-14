@@ -40,7 +40,10 @@ pipeline {
         }
     }
 
-    stage('deploy') {
+    stage('publish') {
+     when {
+        branch 'master'
+     }
      environment {
         GEMFURY_PUSH_URL = credentials('gemfury-access-url')
      }
@@ -48,6 +51,34 @@ pipeline {
         sh './scripts/publish_to_gemfury.sh'
      }
     }
+
+    stage('deploy-dev') {
+     when {
+        branch 'master'
+     }
+     steps {
+        sh 'echo deploying to dev'
+     }
+    }
+
+    stage('deploy-stage') {
+     when {
+        branch 'stage'
+     }
+     steps {
+        sh 'echo deploying to stage'
+     }
+    }
+
+    stage('deploy-production') {
+     when {
+        branch 'production'
+     }
+     steps {
+        sh 'echo deploying to production'
+     }
+    }
+
   }
      post {
         always {
