@@ -1,7 +1,8 @@
 pipeline {
- agent { docker {
-   image 'python:3.7.2'
-   args '--user root'
+ agent { dockerfile {
+   filename 'Dockerfile_python'
+   //image 'python:3.7.2'
+ //  args '--user root'
  } }
   stages {
 //     stage('user_creation'){
