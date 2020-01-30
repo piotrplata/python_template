@@ -42,7 +42,7 @@ master as development branch (On push Jenkins deploys to production environment 
 stage as testing/staging/preproduction (On push Jenkins deploys to staging environment)
 production as production env (On push Jenkins deploys to production environment)
 
-####Jenkins
+#### Jenkins
 To run CI/CD you need machine with Jenkins.
 
 To enable Jenkins automated runs webhooks must be set up. To set up webhooks on github go to project `Settings` on and select `Webhooks`.
@@ -56,15 +56,27 @@ under `Which events would you like to trigger this webhook` select
 
 Now jenkins runs automated tests on every push and every pull request.
 
-####Jenkinsfile
+#### Jenkinsfile
 On push to master stage and production branch Jenkins will deploy to respective environment
 Publish to gemfury is done when pushing do master
 On every push and every pull request automated tests are run.
 
 Jenkinsfile is using Jenkins `pipeline`. [About Pipeline syntax](https://jenkins.io/doc/book/pipeline/syntax/).
-There is also an example of scripted suntax at the bottom of Jenkinsfile.
+There is also an example of scripted syntax at the bottom of Jenkinsfile.
 Recognition of branch is done with `when` step.
 SSH is done with `sshagent` step from ssh agent plugin.
 All credentials are stored in vault.
+
+### Contenrization with dockerfiles
+There are two dockerfiles `Dockerfile_python` and `Dockerfile`. `Dockerfile_python` is a clean python docker image with added temporary user. It is used in Jenkins Pipeline as a base image. `Dockerfile` is a file to contenerize the application.
+To create docker image enter main directory and execute `docker build -t image_name .`.
+TODO information on how to run image/ inormation on how to run shell inside image
+
+### Logging
+### Automated tests
+### Packaging
+### App configuration
+### Setting up virtualenv with requirements.txt
+
 
 
