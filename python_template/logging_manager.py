@@ -3,7 +3,7 @@ from logging.handlers import TimedRotatingFileHandler
 import sys
 import python_template.config as config
 
-LOG_DIR = config.PACKAGE_ROOT / 'logs'
+LOG_DIR = config.PACKAGE_DIR / 'logs'
 LOG_FILE = LOG_DIR / 'steam_explorer_model.log'
 
 FORMATTER = logging.Formatter(

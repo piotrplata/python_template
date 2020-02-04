@@ -57,6 +57,7 @@ under `Which events would you like to trigger this webhook` select
 Now jenkins runs automated tests on every push and every pull request.
 
 #### Jenkinsfile
+The agent for Jenkins is running docker container created from Dockerfile_python. It's default python image with additional temporary user.
 On push to master stage and production branch Jenkins will deploy to respective environment
 Publish to gemfury is done when pushing do master
 On every push and every pull request automated tests are run.
@@ -70,13 +71,29 @@ All credentials are stored in vault.
 ### Contenrization with dockerfiles
 There are two dockerfiles `Dockerfile_python` and `Dockerfile`. `Dockerfile_python` is a clean python docker image with added temporary user. It is used in Jenkins Pipeline as a base image. `Dockerfile` is a file to contenerize the application.
 To create docker image enter main directory and execute `docker build -t image_name .`.
-TODO information on how to run image/ inormation on how to run shell inside image
+To run image use `docker run image_name`. To enter bash terminal inside container use `docker run -it image_name bash`
 
 ### Logging
+Logging is implemented with standard `loggin` module.  In current configuration file logger is set to `WARNING` level logging and console logger is set to `INFO` level logging
+
 ### Automated tests
+Automated tests are located inside `tests` folder. Every file with `test_*` or `*_test` pattern is considered a test file by PyTest package.
+More about python test discovery you can find [here](https://docs.pytest.org/en/latest/goodpractices.html#test-discovery).
+
 ### Packaging
+Packaging is implemented with setuptools package. Setup.py is packaging script. To add to package files that are not python files you can use `MANIFEST.in` file. To install files from `MANIFEST.in` during package installation `include_package_data` parameter of setup function must be set to `True`
+To install package execute `python setup.py install`. To install in develop mode execute `python setup.py develop`. This mode causes that all changes in package source code are instantly reflected during runtime (There is no need to reinstall the package). Another way to install in develop editable mode is to use pip.
+Execute `pip install -e .`
+To build publishable distribution packages use `python setup.py sdist bdist_wheel`
+
 ### App configuration
+In current configuration package is looking for configuration in parent directory of `sys.prefix`. For virtualenv it means a parent directory of virtualenv directory. If no `config.json` file is present the default `config.json` inside package will be used.
+`config.json` is parsed by `config.py` and is accessible through `python_template.config` module.
+
 ### Setting up virtualenv with requirements.txt
+It's a good practice to set up virtual environment for every project and install packages into that environment.
+You can create virtualenv with `virtualenv name_of_venv` command. To activate virtualenv in terminal use `source namve_of_venv/bin/activate`
+To install packages required for the project use `pip install -r requirements.txt`
 
 
 
